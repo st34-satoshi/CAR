@@ -6,6 +6,7 @@ from environment import make_environment
 from decide_action import next_action
 from calculation import calc
 from decide_action import cop_simple_chase
+from decide_action import robber_flee_complicatedly
 
 import pygame
 from pygame.locals import *
@@ -23,8 +24,6 @@ def main():
     pygame.display.set_caption("Cops and Robbers")
     # make first state.
     environment = make_environment.make_environment()
-    action_cop_class = cop_simple_chase.CopSimpleChase(environment)  # next_action.NextActionCop()
-    action_robber_class = next_action.NextActionRobber()
     cops_array = []
     robbers_array = []
     id = 1
@@ -36,6 +35,8 @@ def main():
         rob = robber.Robber(environment, id)
         robbers_array.append(rob)
         id += 1
+    action_cop_class = cop_simple_chase.CopSimpleChase(environment)  # next_action.NextActionCop()
+    action_robber_class = robber_flee_complicatedly.RobberFleeComp(environment, robbers_array)  # next_action.NextActionRobber()
     while True:
         # display the animation
         screen.fill((255, 255, 255, 8))  # background color

@@ -58,11 +58,13 @@ class CopSimpleChase:
         for cp in cops_state_array:
             aim_direction = self.aim_direction(cp, cops_state_array, robbers_state_array)
             move_turn = calc_action.move_to_aim_direction(cp[2], aim_direction, self.max_turn)
-            # print(move_turn)
             cops_action_array.append((cp[0], [move_turn[0], move_turn[1]]))
         return cops_action_array
 
     def decide_next_action_cop(self, cops_state_array, robbers_state_array):
         # cop chase the robber simply
-        return self.square_normal(cops_state_array, robbers_state_array)
+        if self.environment.environment_type() == 'square':
+            return self.square_normal(cops_state_array, robbers_state_array)
+        print("no environment in decide_next_action_cop in cop_simple_chase")
+        return []
 

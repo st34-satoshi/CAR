@@ -9,6 +9,10 @@ class Environment:
         self.screen_size_x = size_x
         self.screen_size_y = size_y
 
+    @staticmethod
+    def environment_type():
+        return 'super'
+
     def draw_environment(self, screen):
         # draw the environment.
         pass

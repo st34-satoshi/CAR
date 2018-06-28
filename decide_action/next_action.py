@@ -1,7 +1,7 @@
 # decide next action.
 # get cops_state_array and robbers_state_array
 # return cops_action_array and _robbers_action_array
-# if you want to make decide_action class, you had better copy this.
+# if you want to make decide_action class, you had better copy or inherit this.
 
 
 class NextActionCop:
