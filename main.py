@@ -1,6 +1,7 @@
 
 import constant
 from player import cop
+from player import robber
 from environment import make_environment
 import pygame
 from pygame.locals import *
@@ -21,9 +22,11 @@ def main():
     cops_array = []
     robbers_array = []
     for i in range(constant.cops_number):
-        p = [50, 50]
         cp = cop.Cop(environment)
         cops_array.append(cp)
+    for i in range(constant.robbers_number):
+        rob = robber.Robber(environment)
+        robbers_array.append(rob)
     while True:
         # display the animation
         screen.fill((255, 255, 255, 8))  # background color
@@ -31,6 +34,9 @@ def main():
         for cp in cops_array:
             draw_circle(screen, cp.make_circle_me())
             draw_circle(screen, cp.make_eye_circle())
+        for rob in robbers_array:
+            draw_circle(screen, rob.make_circle_me())
+            draw_circle(screen, rob.make_eye_circle())
 
         for event in pygame.event.get():
             if event.type == QUIT:
