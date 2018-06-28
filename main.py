@@ -5,6 +5,7 @@ from player import robber
 from environment import make_environment
 from decide_action import next_action
 from calculation import calc
+from decide_action import cop_simple_chase
 
 import pygame
 from pygame.locals import *
@@ -22,7 +23,8 @@ def main():
     pygame.display.set_caption("Cops and Robbers")
     # make first state.
     environment = make_environment.make_environment()
-    action_class = next_action.NextAction()
+    action_cop_class = cop_simple_chase.CopSimpleChase(environment)  # next_action.NextActionCop()
+    action_robber_class = next_action.NextActionRobber()
     cops_array = []
     robbers_array = []
     id = 1
@@ -58,11 +60,13 @@ def main():
         for rob in robbers_array:
             robbers_state_array.append(rob.make_state())
         # decide next action.move cops and robbers. and change to next state
-        cops_action_array, robbers_action_array = action_class.decide_next_action(cops_state_array, robbers_state_array)
+        cops_action_array = action_cop_class.decide_next_action_cop(cops_state_array, robbers_state_array)
+        robbers_action_array = action_robber_class.decide_next_action_robber(cops_state_array, robbers_state_array)
         for cp in cops_array:
             for cp_action in cops_action_array:
                 if cp.id == cp_action[0]:
                     cp.move_cop(cp_action[1][0], cp_action[1][1], environment)
+                    break
         for rob in robbers_array:
             for rob_action in robbers_action_array:
                 if rob.id == rob_action[0]:
