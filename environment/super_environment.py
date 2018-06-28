@@ -1,5 +1,6 @@
 # if you want to make new environment , you should inherit this class
 import random
+import math
 
 
 class Environment:
@@ -22,3 +23,11 @@ class Environment:
         y = random.randint(radius, self.screen_size_y - radius)
         di = random.randint(0, 359)
         return (x, y), di
+
+    @staticmethod
+    def distance(po1, po2):
+        # calculate the distance.
+        x = po1[0] - po2[0]
+        y = po1[1] - po2[1]
+        return math.sqrt(x * x + y * y)
+

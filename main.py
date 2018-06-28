@@ -4,6 +4,8 @@ from player import cop
 from player import robber
 from environment import make_environment
 from decide_action import next_action
+from calculation import calc
+
 import pygame
 from pygame.locals import *
 import sys
@@ -55,7 +57,7 @@ def main():
             cops_state_array.append(cp.make_state())
         for rob in robbers_array:
             robbers_state_array.append(rob.make_state())
-        # decide decide_action
+        # decide next action.move cops and robbers. and change to next state
         cops_action_array, robbers_action_array = action_class.decide_next_action(cops_state_array, robbers_state_array)
         for cp in cops_array:
             for cp_action in cops_action_array:
@@ -65,7 +67,11 @@ def main():
             for rob_action in robbers_action_array:
                 if rob.id == rob_action[0]:
                     rob.move_robber(rob_action[1][0], rob_action[1][1], environment)
-        # move cops and robbers. and get next state
+        # check collision cops and robbers
+        collision_robber_array = calc.collision_robbers_array(cops_array, robbers_array, environment)
+        for rob in collision_robber_array:
+            robbers_array.remove(rob)
+            print("remove robber id = "+str(rob.id))
 
 
 if __name__ == '__main__':
