@@ -12,7 +12,6 @@ class Cop(player.Player):
 
     def move_cop(self, ratio_speed, ratio_direction, environment):
         # always use this function when the cop move.
-        # copを動かすときは常にここを使うようにしたい.足して1を超えたらratio_speedが優先.ratio_directionは正負ある
         if ratio_speed < 0:
             ratio_speed = 0
         if ratio_speed > 1:

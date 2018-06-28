@@ -61,6 +61,10 @@ def main():
             for cp_action in cops_action_array:
                 if cp.id == cp_action[0]:
                     cp.move_cop(cp_action[1][0], cp_action[1][1], environment)
+        for rob in robbers_array:
+            for rob_action in robbers_action_array:
+                if rob.id == rob_action[0]:
+                    rob.move_robber(rob_action[1][0], rob_action[1][1], environment)
         # move cops and robbers. and get next state
 
 
