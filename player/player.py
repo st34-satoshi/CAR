@@ -11,6 +11,10 @@ class Player:
         self.color = color
         self.eye_color = eye_color
         self.id = id
+        self.human = False  # if human play, it is True
+
+    def set_human(self):
+        self.human = True
 
     def get_position(self):
         return self.position

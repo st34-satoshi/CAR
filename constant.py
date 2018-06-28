@@ -12,7 +12,7 @@ environment_circle_radius = 300  # you can change the circle environment radius
 save_record = True  # it save the record when it is True.
 
 # you can play
-your_player = 'none'  # choose 'none', 'cop' or 'robber'.you can play
+your_player = 'cop'  # choose 'none', 'cop' or 'robber'.you can play
 
 # configuration of cops and robbers
 ratio_speed_direction = 10  # the ratio how many degree the player can turn at one move.
