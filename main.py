@@ -22,14 +22,13 @@ def main():
     robbers_array = []
     for i in range(constant.cops_number):
         p = [50, 50]
-        cp = cop.Cop(0, p)
+        cp = cop.Cop(environment)
         cops_array.append(cp)
     while True:
         # display the animation
         screen.fill((255, 255, 255, 8))  # background color
         environment.draw_environment(screen)
         for cp in cops_array:
-            print("cop")
             draw_circle(screen, cp.make_circle_me())
             draw_circle(screen, cp.make_eye_circle())
 
