@@ -1,2 +1,4 @@
 you should install 
 pygame
+math
+random
