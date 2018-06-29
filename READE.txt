@@ -2,3 +2,9 @@ you should install
 pygame
 math
 random
+
+- you can run main.py
+- you can change screen size, environment, the number of cops and robbers.And you can change  some parameter. in constant.py
+- you can play as a cop or robber. change 'your_player' in constant.py
+- you can change the algorithm of cops and robbers move. in main.py line 53?
+- you can make the algorithm of cops and robbers move.you had better watch the example ''

@@ -48,9 +48,22 @@ def main():
         id += 1
         rob.set_human()
         human_player = rob
+    # change here to change the algorithm of cops move
     action_cop_class = cop_simple_chase.CopSimpleChase(environment)  # next_action.NextActionCop()
+    # change here to change the algorithm of robbers move
     action_robber_class = robber_flee_complicatedly.RobberFleeComp(environment, robbers_array)  # next_action.NextActionRobber()
+    steps = 0  # count steps to know the terminating steps
     while True:
+        # check collision cops and robbers
+        collision_robber_array = calc.collision_robbers_array(cops_array, robbers_array, environment)
+        for rob in collision_robber_array:
+            robbers_array.remove(rob)
+            print("remove robber id = " + str(rob.id))
+        if not robbers_array:
+            # there is no robber. it means the end of the game.
+            print("terminate the game! steps = "+str(steps))
+            break
+        steps += 1
         # display the animation
         screen.fill((255, 255, 255, 8))  # background color
         environment.draw_environment(screen)
@@ -114,12 +127,6 @@ def main():
                 human_player.move_cop(ratio_move, ratio_turn, environment)
             elif constant.your_player == 'robber':
                 human_player.move_robber(ratio_move, ratio_turn, environment)
-
-        # check collision cops and robbers
-        collision_robber_array = calc.collision_robbers_array(cops_array, robbers_array, environment)
-        for rob in collision_robber_array:
-            robbers_array.remove(rob)
-            print("remove robber id = "+str(rob.id))
 
 
 if __name__ == '__main__':
