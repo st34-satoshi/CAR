@@ -91,6 +91,11 @@ def direction_from_cops_circumference(rob_state, list_cops, environment):
     return environment.aim_direction((0, 0), (x, y))
 
 
+def direction_from_cops_torus(rob_state, list_cops, environment):
+    # consider only cops. there are no wall
+    return get_weight_cops(rob_state[1], list_cops, 10, environment)[0]
+
+
 def direction(rob_state, list_placed, list_cops, environment):
     # decide the robber aim direction by the cops and the edge of the environment.
     # rob_state is id, position, direction
@@ -98,8 +103,8 @@ def direction(rob_state, list_placed, list_cops, environment):
         return get_direction_from_cops_and_wall(rob_state, list_cops, environment)
     elif environment.environment_type() == 'circle':
         return direction_from_cops_circumference(rob_state, list_cops, environment)
-    # elif mc_file.environment == 11:
-    #     return direction_from_cops_torus(shape_player, list_cops)
+    elif environment.environment_type() == 'torus':
+        return direction_from_cops_torus(rob_state, list_cops, environment)
     else:
         print("error: no environment in get_direction function in for_robber_comp file")
         return 0

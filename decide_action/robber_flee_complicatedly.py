@@ -217,8 +217,8 @@ class RobberFleeComp:
                     action = self.move_free_square_normal(rob, state_robber)
                 elif self.environment.environment_type() == 'circle':
                     action = self.move_free_square_normal(rob, state_robber)
-                # elif mc_file.environment == 11:
-                #     shape_player.move_randomly(mc_file.robber_max_speed, mc_file.robber_max_direction())
+                elif self.environment.environment_type() == 'torus':
+                    action = self.move_free_square_normal(rob, state_robber)
                 else:
                     print("error: no environment in flee_simply function in robber_flee_comp file")
             else:
