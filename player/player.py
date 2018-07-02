@@ -28,6 +28,20 @@ class Player:
         y = (self.radius-self.eye_radius)*math.sin((self.direction/180.0)*math.pi)
         return x+self.position[0], self.position[1]+y
 
+    def get_record_string(self):
+        # return the string data of this class
+        return str(self.id) + "," + str(self.direction) + "," + str(self.position[0]) + "," + str(self.position[1]) + "," + str(self.human) + ","
+
+    def read_from_data(self, data):
+        list_data = data.pop(0).split(",")
+        self.id = int(list_data[0])
+        self.direction = float(list_data[1])
+        x = float(list_data[2])
+        y = float(list_data[3])
+        self.position = [x, y]
+        if list_data[4] == 'True':
+            self.human = True
+
     def make_circle_me(self):
         return circle_shape.CircleShape(self.radius, self.position, self.color)
 

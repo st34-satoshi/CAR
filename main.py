@@ -7,6 +7,7 @@ from decide_action import next_action
 from calculation import calc
 from decide_action import cop_simple_chase
 from decide_action import robber_flee_complicatedly
+from record import record_data
 
 import pygame
 from pygame.locals import *
@@ -22,6 +23,8 @@ def main():
     pygame.init()
     screen = pygame.display.set_mode((constant.screen_size_x, constant.screen_size_y))
     pygame.display.set_caption("Cops and Robbers")
+    # make record class
+    record = record_data.Record()
     # make first state.
     environment = make_environment.make_environment()
     cops_array = []
@@ -54,6 +57,9 @@ def main():
     action_robber_class = robber_flee_complicatedly.RobberFleeComp(environment, robbers_array)  # next_action.NextActionRobber()
     steps = 0  # count steps to know the terminating steps
     while True:
+        # save the record
+        if constant.save_record:
+            record.save_record(cops_array, robbers_array)
         # check collision cops and robbers
         collision_robber_array = calc.collision_robbers_array(cops_array, robbers_array, environment)
         for rob in collision_robber_array:
@@ -62,6 +68,9 @@ def main():
         if not robbers_array:
             # there is no robber. it means the end of the game.
             print("terminate the game! steps = "+str(steps))
+            # save the record to file
+            if constant.save_record:
+                record.save_to_filename_file_all('record/CAR-record')
             break
         steps += 1
         # display the animation
@@ -76,6 +85,9 @@ def main():
 
         for event in pygame.event.get():
             if event.type == QUIT:
+                # save the record to file
+                if constant.save_record:
+                    record.save_to_filename_file_all('record/CAR-record')
                 pygame.quit()
                 sys.exit()
         pygame.display.update()
