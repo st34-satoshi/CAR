@@ -1,5 +1,6 @@
 import constant
 from environment import square_normal_environment
+from environment import circle_environment
 
 
 def make_environment():
@@ -8,4 +9,8 @@ def make_environment():
     screen_size_y = constant.screen_size_y
     if environment == 'square':
         return square_normal_environment.SquareNormal(screen_size_x, screen_size_y)
+    elif environment == 'circle':
+        return circle_environment.CircleEnvironment(screen_size_x, screen_size_y)
+    else:
+        print("error: no environment in make_environment. "+str(environment))
 

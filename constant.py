@@ -4,7 +4,7 @@ screen_size_x = 600  # 300
 screen_size_y = 600
 
 # environment
-environment = 'square'  # choose 'torus' , 'square' or 'circle '
+environment = 'circle'  # choose 'torus' , 'square' or 'circle '
 environment_circle_color = (200, 200, 200)
 environment_circle_radius = 300  # you can change the circle environment radius
 

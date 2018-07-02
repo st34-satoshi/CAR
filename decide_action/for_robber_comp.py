@@ -70,16 +70,38 @@ def get_direction_from_cops_and_wall(rob_state, list_cops, environment):
     return environment.aim_direction((0, 0), (x, y))
 
 
+def weight_circumference(position, weight_c, environment):
+    # calculate the weight.how the robber want to avoid the circumference
+    direction = environment.aim_direction(position, [environment.center_x, environment.center_y])
+    distance_to_circumference = constant.environment_circle_radius - environment.distance([environment.center_x, environment.center_y],
+                                                                                      position)
+    weight = weight_c/distance_to_circumference
+    return direction, weight
+
+
+def direction_from_cops_circumference(rob_state, list_cops, environment):
+    # decide the direction to go , by the cops places and the distance to the circumference
+    # rob_state is id, position, direction
+    weight_cops = 2500
+    weight_c = 400
+    cops = get_weight_cops(rob_state[1], list_cops, weight_cops, environment)
+    circumference = weight_circumference(rob_state[1], weight_c, environment)
+    x = circumference[1]*5*calc.get_cosin(circumference[0]) + cops[1]*calc.get_cosin(cops[0])
+    y = circumference[1] * 5 * calc.get_sin(circumference[0]) + cops[1]*calc.get_sin(cops[0])
+    return environment.aim_direction((0, 0), (x, y))
+
+
 def direction(rob_state, list_placed, list_cops, environment):
     # decide the robber aim direction by the cops and the edge of the environment.
+    # rob_state is id, position, direction
     if environment.environment_type() == 'square':
         return get_direction_from_cops_and_wall(rob_state, list_cops, environment)
-    # elif mc_file.environment == 2:
-    #     return direction_from_cops_circumference(shape_player, list_cops)
+    elif environment.environment_type() == 'circle':
+        return direction_from_cops_circumference(rob_state, list_cops, environment)
     # elif mc_file.environment == 11:
     #     return direction_from_cops_torus(shape_player, list_cops)
     else:
-        print("error: no environment in get_direction function in get_robber_direction file")
+        print("error: no environment in get_direction function in for_robber_comp file")
         return 0
 
 

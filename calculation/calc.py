@@ -1,5 +1,7 @@
 import math
 
+import constant
+
 
 def collision_robbers_array(list_cops, list_robbers, environment):
     # check there are some cops collision to the robber.
@@ -41,13 +43,22 @@ def check_collision_wall_normal_square(position_me, direction, distance, environ
     return False
 
 
+def check_collision_wall_circle(position_me, direction, distance, environment):
+    x = position_me[0] + distance * get_cosin(direction)
+    y = position_me[1] + distance * get_sin(direction)
+    distance_from_center = environment.distance((x, y), [environment.center_x, environment.center_y])
+    if distance_from_center > constant.environment_circle_radius:
+        return True
+    return False
+
+
 def get_collision_wall(position_me, direction, distance, environment):
     # distance : if the robber move this distance, is there a collision?
     # do not consider players radius
     if environment.environment_type() == 'square':
         return check_collision_wall_normal_square(position_me, direction, distance, environment)
-    # elif mc_file.environment == 2:
-    #     return check_collision_wall_circle(position_me, direction, distance)
+    elif environment.environment_type() == 'circle':
+        return check_collision_wall_circle(position_me, direction, distance, environment)
     # elif mc_file.environment == 11:
     #     # player cannot collide the wall. because there is no wall
     #     return False

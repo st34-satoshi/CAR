@@ -116,7 +116,6 @@ class RobberFleeComp:
     # decide how robber move by state.
     # if there are cop close to the robber , flee from it.
 
-
     def __init__(self, environment, robbers_array):
         self.environment = environment
         self.state_array = []
@@ -188,7 +187,7 @@ class RobberFleeComp:
                 state_robber.set_aim_direction(0)
             return action
         else:
-            print("error; no state in move_free function in robber file")
+            print("error; no state in move_free_square_normal function in robber_flee_comp file")
             state_robber.print_state()
             return 0, 0
         return calc_action.move_to_aim_direction(rob_state[2], state_robber.aim_direction, self.max_speed)
@@ -216,12 +215,12 @@ class RobberFleeComp:
                     state_robber.set_placed_list_empty()
                 if self.environment.environment_type() == 'square':
                     action = self.move_free_square_normal(rob, state_robber)
-                # elif mc_file.environment == 2:
-                #     move_free_circle(shape_player)
+                elif self.environment.environment_type() == 'circle':
+                    action = self.move_free_square_normal(rob, state_robber)
                 # elif mc_file.environment == 11:
                 #     shape_player.move_randomly(mc_file.robber_max_speed, mc_file.robber_max_direction())
                 else:
-                    print("error: no environment in flee simply function in move robber file")
+                    print("error: no environment in flee_simply function in robber_flee_comp file")
             else:
                 # there are some cop close to the robber.
                 list_emergency_cops = calc_action.near_cops_array(rob[1], near_cops_array, self.distance_emergency_cops, self.environment)

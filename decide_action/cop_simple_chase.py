@@ -65,6 +65,8 @@ class CopSimpleChase:
         # cop chase the robber simply
         if self.environment.environment_type() == 'square':
             return self.square_normal(cops_state_array, robbers_state_array)
+        elif self.environment.environment_type() == 'circle':
+            return self.square_normal(cops_state_array, robbers_state_array)
         print("no environment in decide_next_action_cop in cop_simple_chase")
         return []
 
