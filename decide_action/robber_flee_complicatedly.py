@@ -1,6 +1,7 @@
 import constant
 from decide_action import calc_action
 from decide_action import for_robber_comp
+from environment import make_environment
 
 import random
 
@@ -116,12 +117,12 @@ class RobberFleeComp:
     # decide how robber move by state.
     # if there are cop close to the robber , flee from it.
 
-    def __init__(self, environment, robbers_array):
-        self.environment = environment
+    def __init__(self):
+        self.environment = make_environment.make_environment()
         self.state_array = []
-        for rob in robbers_array:
-            self.state_array.append(StateRobber(rob.id))
-        self.distance_escape_from_cop = environment.max_distance() / 4  # the distance from the cop , the robber start to flee from it.
+        # for rob in robbers_array:
+        #     self.state_array.append(StateRobber(rob.id))
+        self.distance_escape_from_cop = self.environment.max_distance() / 4  # the distance from the cop , the robber start to flee from it.
         self.distance_escape_from_wall = 50  # the distance from the wall the robber start to flee from it.
         self.max_count_escape_wall = 20  # how long the robber flee from the wall.
         self.distance_emergency_cops = 70  # the distance from the cop to become the emergency.
@@ -193,6 +194,10 @@ class RobberFleeComp:
         return calc_action.move_to_aim_direction(rob_state[2], state_robber.aim_direction, self.max_speed)
 
     def decide_next_action_robber(self, cops_state_array, robbers_state_array):
+        if not self.state_array:
+            # if it is the first time, make robber_state_array
+            for rob in robbers_state_array:
+                self.state_array.append(StateRobber(rob[0]))
 
         robbers_action_array = []
         for rob in robbers_state_array:

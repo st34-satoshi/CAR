@@ -1,3 +1,5 @@
+# when you make new environment, you should change this function
+
 import constant
 from environment import square_normal_environment
 from environment import circle_environment

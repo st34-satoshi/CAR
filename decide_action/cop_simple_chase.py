@@ -1,6 +1,7 @@
 import constant
 from calculation import calc
 from decide_action import calc_action
+from environment import make_environment
 
 
 class CopSimpleChase:
@@ -8,8 +9,8 @@ class CopSimpleChase:
     cop_weight_to_robber = 10  # the weight cop want to go to the nearest robber.
     max_turn = constant.cop_max_speed*constant.ratio_speed_direction
 
-    def __init__(self, environment):
-        self.environment = environment
+    def __init__(self):
+        self.environment = make_environment.make_environment()
 
     def leave_cop(self, cops_state_array, position):
         # cops try to leave from the other cops.

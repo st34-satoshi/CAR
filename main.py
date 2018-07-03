@@ -52,9 +52,9 @@ def main():
         rob.set_human()
         human_player = rob
     # change here to change the algorithm of cops move
-    action_cop_class = cop_simple_chase.CopSimpleChase(environment)  # next_action.NextActionCop()
+    action_cop_class = cop_simple_chase.CopSimpleChase()  # next_action.NextActionCop()
     # change here to change the algorithm of robbers move
-    action_robber_class = robber_flee_complicatedly.RobberFleeComp(environment, robbers_array)  # next_action.NextActionRobber()
+    action_robber_class = robber_flee_complicatedly.RobberFleeComp()  # next_action.NextActionRobber()
     steps = 0  # count steps to know the terminating steps
     while True:
         # save the record
