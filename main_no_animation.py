@@ -12,6 +12,8 @@ import sys
 
 
 def main_no_animation():
+    # terminate max_steps. if steps over it, it means cops cannot capture the robbers
+    max_steps = 10000
     # make first state.
     environment = make_environment.make_environment()
     cops_array = []
@@ -26,9 +28,9 @@ def main_no_animation():
         robbers_array.append(rob)
         id += 1
     # change here to change the algorithm of cops move
-    action_cop_class = cop_simple_chase.CopSimpleChase(environment)  # next_action.NextActionCop()
+    action_cop_class = cop_simple_chase.CopSimpleChase()  # next_action.NextActionCop()
     # change here to change the algorithm of robbers move
-    action_robber_class = robber_flee_complicatedly.RobberFleeComp(environment, robbers_array)  # next_action.NextActionRobber()
+    action_robber_class = robber_flee_complicatedly.RobberFleeComp()  # next_action.NextActionRobber()
     steps = 0  # count steps to know the terminating steps
     while True:
         # check collision cops and robbers
@@ -62,6 +64,8 @@ def main_no_animation():
                 for rob_action in robbers_action_array:
                     if rob.id == rob_action[0]:
                         rob.move_robber(rob_action[1][0], rob_action[1][1], environment)
+        if steps >= max_steps:
+            break
     return steps
 
 

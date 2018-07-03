@@ -59,9 +59,9 @@ def get_collision_wall(position_me, direction, distance, environment):
         return check_collision_wall_normal_square(position_me, direction, distance, environment)
     elif environment.environment_type() == 'circle':
         return check_collision_wall_circle(position_me, direction, distance, environment)
-    # elif mc_file.environment == 11:
-    #     # player cannot collide the wall. because there is no wall
-    #     return False
+    elif environment.environment_type() == 'torus':
+        # player cannot collide the wall. because there is no wall
+        return False
     else:
         print("error: no environment get_collision_wall in calc file")
 
