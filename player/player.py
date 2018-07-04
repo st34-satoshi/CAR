@@ -16,6 +16,12 @@ class Player:
     def set_human(self):
         self.human = True
 
+    def set_color(self, color):
+        self.color = color
+
+    def set_eye_color(self, color):
+        self.eye_color = color
+
     def get_position(self):
         return self.position
 

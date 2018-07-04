@@ -13,6 +13,8 @@ save_record = True  # it save the record when it is True.
 
 # you can play
 your_player = 'none'  # choose 'none', 'cop' or 'robber'.you can play
+your_color = pygame.color.Color('green')  # the color of the your player
+your_eye_color = pygame.color.Color('gold')  # the color of the your 'eye'
 
 # configuration of cops and robbers
 ratio_speed_direction = 1  # the ratio how many degree the player can turn at one move.

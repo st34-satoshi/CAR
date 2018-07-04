@@ -45,12 +45,16 @@ def main():
         id += 1
         cp.set_human()
         human_player = cp
+        cp.set_color(constant.your_color)
+        cp.set_eye_color(constant.your_eye_color)
     elif constant.your_player == 'robber':
         rob = robber.Robber(environment, id)
         robbers_array.append(rob)
         id += 1
         rob.set_human()
         human_player = rob
+        cp.set_color(constant.your_color)
+        cp.set_eye_color(constant.your_eye_color)
     # change here to change the algorithm of cops move
     action_cop_class = cop_simple_chase.CopSimpleChase()
     # action_cop_class = next_action.NextActionCop()  # this is example.cop move only straight.
